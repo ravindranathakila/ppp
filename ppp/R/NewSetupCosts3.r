@@ -1,4 +1,4 @@
-NewSetupCosts3<-function(a.data,...){
+NewSetupCosts3 <- function(a.data, ...){
   
   ## Generate logical cost.period matricies for use in Prioritisation()##
   ## CleanCosts function in Prioritisation is no longer needed.
@@ -12,7 +12,7 @@ NewSetupCosts3<-function(a.data,...){
   
   # spread cost years out across 50 columns for each of the cost periods
   counter<-0
-  for(i in c(13,15,17)){
+  for(i in c("Period1Sequence","Period2Sequence","Period3Sequence")){
     spread<-strsplit(as.character(a.data[,i]),"\\,")
     sizes<-sapply(spread,length)
     mat<-matrix(rep(0,T*length(spread)),nrow=length(spread),ncol=T)
@@ -28,7 +28,7 @@ NewSetupCosts3<-function(a.data,...){
       return(stop("Code stopped due to years >T in R_actions",'\n'))
     }
     # create logical matrix and populate with TRUE for years that have costs. This eliminates the need for CleanCosts function in Prioritisation.
-    logical<-matrix(rep(FALSE,T*nrow(a.data)),nrow=nrow(a.data),ncol=10)
+    logical<-matrix(rep(FALSE,T*nrow(a.data)),nrow=nrow(a.data),ncol = T)
     for(i in 1:nrow(a.data)){ # for each row in mat
       years<-mat[i,mat[i,]>0]
       logical[i,years]<-TRUE
@@ -61,7 +61,7 @@ NewSetupCosts3<-function(a.data,...){
        return(invisible)
      }
         
-        # spread costs across the 10 years
+        # spread costs across the T years
         cost.1<-a.data$Period1Cost*cost.period
         cost.2<-a.data$Period2Cost*cost.period
         cost.3<-a.data$Period3Cost*cost.period

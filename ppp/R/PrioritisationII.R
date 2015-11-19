@@ -26,12 +26,6 @@ PrioritisationII <- function(directory = getwd(), weighting,
   n_projects <- NROW(a.data)
   n_species <- length(with(a.data, unique(species_id)))
   
-  ########################################################
-  ### Create a matrix of overlap codes (row per act) #####
-  ########################################################
-  overlap_data <- MakeOverlaps(with(a.data, action_id), o.data,
-      overlap.indicator)
-  
   ###############################################################
   ## Create a matrix of years actions are costed (row per act) ##
   ###############################################################
@@ -126,7 +120,7 @@ PrioritisationII <- function(directory = getwd(), weighting,
         #     select = action_id)
     }
     
-    # if there are any species due to strange CE, then print a summary
+    # if there are any species removed due to strange CE, then print a summary
     if(sum(removers) > 0){
       if(loop_iteration == 1){
         cat('\t|------------------------------------------\n')
@@ -159,15 +153,17 @@ PrioritisationII <- function(directory = getwd(), weighting,
       # Remove actions and benefits associated with the removed species
       out_actions <- subset(a.data, subset = species_id %in% removers, 
           select = action_id, drop = TRUE)
-      
+#if(loop_iteration == 2){
+    #browser()
+    #}
       a.data <- subset(a.data, 
           subset = !(action_id %in% out_actions))
       
-      overlap_data <- subset(overlap_data, 
-              subset = !(action_id %in% out_actions))
+      #overlap_data <- subset(overlap_data, 
+      #        subset = !(action_id %in% out_actions))
       
-      cost.period <- subset(cost.period, 
-          subset = !(action_id %in% out_actions))
+      #cost.period <- subset(cost.period, 
+      #    subset = !(action_id %in% out_actions))
       
       costs_matrix <- subset(costs_matrix, 
           subset = !(action_id %in% out_actions))
@@ -223,7 +219,6 @@ PrioritisationII <- function(directory = getwd(), weighting,
       ans$dir <- directory
       
       # Save parameters of interest
-      ans$datasets <- data
       
       ans$input.parameters <- 
         cbind(set_budget, 
@@ -374,7 +369,7 @@ PrioritisationII <- function(directory = getwd(), weighting,
     disc <- (1 + discount.rate)^(0:(T-1))
     new_costs <- lapply(cost_prescr_vect, function(x) (x/disc))
     
-    annual_costs <- matrix(unlist(new_costs), ncol = 10, byrow = TRUE)
+    annual_costs <- matrix(unlist(new_costs), ncol = T, byrow = TRUE)
     # Find the order of new_costs
     #orders <- lapply(new_costs, function(x) c(which(x != 0), which(x == 0)))
     #annual_costs <- t(sapply(1:length(new_costs), 

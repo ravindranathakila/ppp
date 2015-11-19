@@ -2,7 +2,7 @@
 # W. Probert, 2015
 
 # Set the path to the project folder
-main_d <- file.path('/', 'Users', 'wjmprobert', 'Downloads', 'Martina_code')
+main_d <- file.path()
 
 # Import the weighting functions
 source(file.path(main_d, "R", "SetupWeights.R"))
