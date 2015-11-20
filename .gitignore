@@ -1,2 +1,9 @@
 # Mac OSX related files
 .DS_Store
+
+# Document or data files (that are not .csv)
+*.pdf
+*.doc
+*.docx
+*.tex
+*.xls
