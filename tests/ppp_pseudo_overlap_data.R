@@ -1,6 +1,3 @@
-# Script to generate data for testing the PPP.  
-# Generate PPP for 5 species each with 4 actions each.  
-# W. Probert, 2015
 
 weighting <- 1
 multiplier <- 1
@@ -17,8 +14,6 @@ Nact <- c(4, 4, 4, 4, 4)
 
 tot.acts <- sum(Nact)
 
-# Generate the actions dataset
-# 5 species, each with 4 actions
 a.data <- data.frame(
   action_id = 1:tot.acts,
   species_id = rep(1:Nspp, times = Nact),
@@ -41,6 +36,12 @@ a.data <- data.frame(
   ManagementSiteOutputSuccess = 80,
   ActionObjectiveSuccessProbability = 80
 )
+
+# Make sure data are character type (not factor)
+cols_as_char <- c("Period1Sequence", "Period2Sequence", "Period3Sequence")
+for (col in cols_as_char){
+    a.data[,col] <- as.character(a.data[,col])
+}
 
 # Generate the benefits data probability of persistence 
 # is 75% with all actions and 15% without management
@@ -91,3 +92,15 @@ CostList <- NewSetupCosts3(a.data, T, year.text)
 cost.period <- CostList$period
 all.costs <- data.frame("action_id" = with(a.data, action_id))
 all.costs <- cbind(all.costs, CostList$allcost)
+
+
+
+# Adjustments to make costs overlaps
+
+# Remove action 1, 2 from being costed in year 1
+no_yr_1_costs <- paste(2:T, sep = "", collapse = ",")
+a.data[a.data$action_id %in% c(1, 2), "Period1Sequence"] <- no_yr_1_costs
+
+# Now let's make action 7 and action 1 share an overlap code
+o.data[7, "overlap_id"] <- 1
+

@@ -153,17 +153,9 @@ PrioritisationII <- function(directory = getwd(), weighting,
       # Remove actions and benefits associated with the removed species
       out_actions <- subset(a.data, subset = species_id %in% removers, 
           select = action_id, drop = TRUE)
-#if(loop_iteration == 2){
-    #browser()
-    #}
+    
       a.data <- subset(a.data, 
           subset = !(action_id %in% out_actions))
-      
-      #overlap_data <- subset(overlap_data, 
-      #        subset = !(action_id %in% out_actions))
-      
-      #cost.period <- subset(cost.period, 
-      #    subset = !(action_id %in% out_actions))
       
       costs_matrix <- subset(costs_matrix, 
           subset = !(action_id %in% out_actions))
