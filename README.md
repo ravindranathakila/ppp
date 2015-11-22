@@ -1,6 +1,6 @@
 # Project Prioritisation Protocol (PPP)
 
-Code repository for running the Project Prioritisation Protocol (ppp).  R code in the **ppp** folder and testing scripts illustrating how the PPP works in the **tests** folder.  
+Code repository for running the Project Prioritisation Protocol (PPP).  R code in the **ppp** folder and testing scripts illustrating how the PPP works in the **tests** folder.  
 
 # What is a PPP?  
 
@@ -10,9 +10,22 @@ The problem the PPP has been most commonly applied to is that of choosing which 
 
 # Why is PPP needed?  
 
-The PPP algorithm is needed because the knapsack problem is very difficult to solve for a large number of threatened species projects.  
+The PPP algorithm is needed because the knapsack problem is very difficult computationally to solve for a large number of threatened species projects.  
 
-# What is in this repository?  
+Consider you have 3 projects that you can fund (A, B, C), and the problem is to find the best combination of projects to fund so as to maximise species persistence over, say, 50 years, given a limited budget.  The complete set of different funding regimes that are possible are the following:
+
+* Fund A, B, C
+* Fund A, don't fund B, C
+* Fund B, don't fund A, C
+* Fund C, don't func A, B
+* Fund A, B, don't fund C, 
+* Fund A, C, don't fund B, 
+* Fund B, C, don't A
+* Don't fund A, B, C
+
+So that is 8 different possible funding regimes for 3 different projects.  Note that $8 = 2^3$.  One would have to check the expected level of species persistence after 50 years for each of these regimes to find that regime which is the best to use.  
+
+For 3 projects this is a simple problem, however, notice that the number of possible funding regimes is $2^N$, where $N$ is the number of different projects that can possibly be funded.  
 
 
 
