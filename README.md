@@ -23,9 +23,9 @@ Consider you have 3 projects that you can fund (A, B, C), and the problem is to 
 * Fund B, C, don't A
 * Don't fund A, B, C
 
-So that is 8 different possible funding regimes for 3 different projects.  Note that $8 = 2^3$.  One would have to check the expected level of species persistence after 50 years for each of these regimes to find that regime which is the best to use.  
+So that is 8 different possible funding regimes for 3 different projects.  Note that 8 = 2**3 (2 to the power of 3).  One would have to check the expected level of species persistence after 50 years for each of these regimes to find that regime which is the best to use.  
 
-For 3 projects this is a simple problem, however, notice that the number of possible funding regimes is $2^N$, where $N$ is the number of different projects that can possibly be funded.  
+For 3 projects this is a simple problem, however, notice that the number of possible funding regimes is 2**`N` (2 to the power of `N`), where `N` is the number of different projects that can possibly be funded.  
 
 
 
