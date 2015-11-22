@@ -32,7 +32,7 @@ The PPP is therefore used as an approximation to this exact solution method so t
 
 ## How does the PPP work?  
 
-The PPP uses an iterative approach to find a subset of projects to fund.  It ranks projects based on their cost-efficiency and iteratively removes the least cost-effective project.  After each additional project is removed the PPP recalculates cost-efficiency scores of funding each project due to overlaps in costs and benefits of each project.  Further details are in the references below.  
+The PPP uses an iterative approach to find a subset of projects to fund.  It starts by assuming all projects are funded and ranks all projects based on cost-efficiency.  It then iteratively removes the least cost-effective project and recalculates cost-efficiency scores for each project at each iteration (because of overlaps in costs and benefits of each project).  Further details are found in the references below.  
 
 ## References
 * [Joseph et al. (2009) Optimal Allocation of Resources among Threatened Species: a Project Prioritization Protocol. Conservation Biology. 23: 328–338.](http://onlinelibrary.wiley.com/doi/10.1111/j.1523-1739.2008.01124.x/abstract)
