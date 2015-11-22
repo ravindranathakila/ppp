@@ -1,6 +1,12 @@
-## Project Prioritisation Protocol
+## Project Prioritisation Protocol (PPP)
 
-This repository contains R code for the Project Prioritisation Protocol outlined in Joseph et al (2008).  
+
+### What is a PPP?  
+
+### Why is PPP needed?  
+
+### What is in this repository?  
+
 
 The following are contained in this repository: 
 
