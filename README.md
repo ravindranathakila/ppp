@@ -8,7 +8,7 @@ The project prioritisation protocol (PPP) is an algorithm for finding an approxi
 
 The problem the PPP has been most commonly applied to is that of choosing which management projects to fund from a range of threatened species management projects (given that it is not possible to fund management of all species) under a budget constraint.  
 
-## Why is PPP needed?  
+## Why is a PPP needed?  
 
 The PPP algorithm is needed because the knapsack problem is very difficult computationally to solve for a large number of threatened species projects.  
 
@@ -27,7 +27,7 @@ So that is 8 different possible funding regimes for 3 different projects.  Note 
 
 For 3 projects this is a simple problem.  However, notice that the number of possible funding regimes is 2\*\*`N` (2 to the power of `N`), where `N` is the number of different projects that can possibly be funded.  If there were 40 projects and it took 1 millisecond to check the expected persistence of each of the 2\*\*40 regimes constructed from these different projects (i.e. Fund A, B, C, ...., Don't fund X, Y, Z) then it would take just under 36 years to check them all and find the best regime using such an exhaustive approach (0.001 * 2^40 / 60 / 60 / 24 / 365).  
 
-The PPP is used as an approximation to this solution method.  
+The PPP is used as an approximation to this exact solution method so that a solution can actually be found in reasonable time.  
 
 ## How does the PPP work?  
 
