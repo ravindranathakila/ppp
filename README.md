@@ -13,7 +13,7 @@ The problem the PPP has been most commonly applied to is that of choosing which 
 The PPP algorithm is needed because the knapsack problem has so many possible solutions that it becomes computationally too difficult to solve for a large number of projects in a reasonable amount of time.  
 
 ##### Example
-Suppose there are 3 projects that you can fund (A, B, C), and the problem is to find the best combination of projects to fund so as to maximise species persistence over, say, 50 years, given a limited budget.  The complete set of different funding regimes that are possible are the following:
+Suppose there are 3 species projects that you can fund (species A, species B, species C), and the problem is to find the best combination of projects to fund so as to maximise species persistence over 50 years, given a limited budget.  The complete set of different funding regimes that are possible are the following: 
 
 * Fund A, B, C
 * Fund A, don't fund B, C
@@ -24,11 +24,11 @@ Suppose there are 3 projects that you can fund (A, B, C), and the problem is to 
 * Fund B, C, don't A
 * Don't fund A, B, C
 
-So that is 8 different possible funding regimes for 3 different projects.  Note that 8 = 2**3 (2 to the power of 3).  One would have to check the expected level of species persistence after 50 years for each of these regimes to find that regime which is the best to use.  
+There are all the possible solutions to the knapsack problem - that is 8 different possible funding regimes for 3 different projects.  Note that 8 = 2**3 (2 to the power of 3).  One would have to check the expected level of species persistence after 50 years for each of these regimes to find that regime which is the best to use.  
 
-For 3 projects this is a simple problem.  However, notice that the number of possible funding regimes is 2\*\*`N` (2 to the power of `N`), where `N` is the number of different projects that can possibly be funded.  If there were 40 projects and it took 1 millisecond to check the expected persistence of each of the 2\*\*40 regimes constructed from these different projects (i.e. Fund A, B, C, ...., Don't fund X, Y, Z) then it would take just under 36 years to check them all and find the best regime using such an exhaustive approach (0.001 * 2^40 / 60 / 60 / 24 / 365).  
+For 3 projects this is a simple problem to solve.  However, notice that the number of possible funding regimes is 2\*\*`N` (2 to the power of `N`), where `N` is the number of different projects that can possibly be funded.  If there were 40 projects and it took 1 millisecond to check the expected persistence of each of the 2\*\*40 regimes constructed from these different projects (i.e. Fund A, B, C, ...., Don't fund X, Y, Z) then it would take just under 35 years to check them all and find the best regime using such an exhaustive approach (that is, 0.001 * 2^40 / 60 / 60 / 24 / 365 = 34.87).  
 
-The PPP is used as an approximation to this exact solution method so that a solution can actually be found in reasonable time.  
+The PPP is therefore used as an approximation to this exact solution method so that a solution, albeit an approximate solution, can actually be found in a reasonable amount of time.  
 
 ## How does the PPP work?  
 
