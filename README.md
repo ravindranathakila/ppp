@@ -10,9 +10,10 @@ The problem the PPP has been most commonly applied to is that of choosing which 
 
 ## Why is a PPP needed?  
 
-The PPP algorithm is needed because the knapsack problem is very difficult computationally to solve for a large number of threatened species projects.  
+The PPP algorithm is needed because the knapsack problem has so many possible solutions that it becomes computationally too difficult to solve for a large number of projects in a reasonable amount of time.  
 
-Consider you have 3 projects that you can fund (A, B, C), and the problem is to find the best combination of projects to fund so as to maximise species persistence over, say, 50 years, given a limited budget.  The complete set of different funding regimes that are possible are the following:
+##### Example
+Suppose there are 3 projects that you can fund (A, B, C), and the problem is to find the best combination of projects to fund so as to maximise species persistence over, say, 50 years, given a limited budget.  The complete set of different funding regimes that are possible are the following:
 
 * Fund A, B, C
 * Fund A, don't fund B, C
