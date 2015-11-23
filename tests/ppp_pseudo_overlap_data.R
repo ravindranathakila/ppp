@@ -1,13 +1,39 @@
+# Script to generate data for testing the PPP.  
+# Generate PPP for 5 species each with 4 actions each.  
+# This data includes actions with overlapping costs.  
+# W. Probert, 2015
 
+
+##################
+# INPUT PARAMETERS
+
+# Exponent used to calculate weights (i.e. W = multiplier*(R*D)^weighting)
 weighting <- 1
+
+# Coefficient used to calculate weights (i.e. W = multiplier*(R*D)^weighting)
 multiplier <- 1
+
+# The set annual budget
 set_budget <- 0
+
+# Should overlaps in costs between actions be calculated?  
 overlap.indicator <- TRUE
+
+# Discount rate for costs
 discount.rate <- 0
+
+# The iteration number after which the prioritisation should stop
 stop.iteration <- Inf
+
+# Stop the PPP when it has this many species remaining.  
 stop.no.of.species <- 0
-year.text <- "Y"
+
+# The time horizon of when costs have been recorded until
 T <- 5
+
+# Column names used in the costs matrix (users can ignore this)
+year.text <- "Y"
+
 
 Nspp <- 5
 Nact <- c(4, 4, 4, 4, 4)

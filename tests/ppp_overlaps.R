@@ -1,16 +1,13 @@
 # Example PPP on mock data with overlaps
 # W. Probert, 2015
 
-directory <- file.path('/', 'Users', 'wjmprobert', 'Projects', 'ppp')
-
-# Specify the directory in which you want to save the files
-# (here specified as the same directory as the working directory)
-save_dir <- file.path('/', 'Users', 'wjmprobert', 'Projects', 'ppp')
+# Specify the path where the PPP directory is 
+# (this is also where output files will be saved)
+directory <- file.path('/', 'Users', 'username', 'Desktop', 'ppp')
 
 setwd(directory)
 
 # Import the functions to run the PPP
-source(file.path(directory, "ppp", "R", "MakeOverlaps.R"))
 source(file.path(directory, "ppp", "R", "UpdateWeightsII.R"))
 source(file.path(directory, "ppp", "R", "CalculateWeightsII.R"))
 source(file.path(directory, "ppp", "R", "NewCalcCosts.R"))
@@ -50,10 +47,10 @@ ppp$date
 
 # Save some of the output to csv files
 outfile <- paste(ppp$date, 'removed_list.csv')
-with(ppp, write.csv(removed.spp.df, file.path(save_dir, outfile), 
+with(ppp, write.csv(removed.spp.df, file.path(directory, outfile), 
     row.names = FALSE))
 
 
 outfile <- paste(ppp$date, 'ranked_list.csv')
-with(ppp, write.csv(ranked_list, file.path(save_dir, outfile), 
+with(ppp, write.csv(ranked_list, file.path(directory, outfile), 
     row.names = FALSE))
