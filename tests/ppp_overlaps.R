@@ -3,6 +3,10 @@
 
 # Specify the path where the PPP directory is 
 # (this is also where output files will be saved)
+# this can also be specified using a complete path name,
+# such as directory <- 'C:\Users\Greg\Documents'
+# Be wary that forward or backward slashes are different
+# in file-name specification between windows and mac
 directory <- file.path('/', 'Users', 'username', 'Desktop', 'ppp')
 
 setwd(directory)
