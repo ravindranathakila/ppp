@@ -1,6 +1,8 @@
 # Project Prioritisation Protocol (PPP)
 
-Code repository for running the Project Prioritisation Protocol (PPP).  R code in the **ppp** folder and testing scripts illustrating how the PPP works in the **tests** folder.  
+Code repository for running the Project Prioritisation Protocol (PPP).  
+
+R code in the **ppp** folder and testing scripts illustrating how the PPP works in the **tests** folder.  
 
 ## What is a PPP?  
 
