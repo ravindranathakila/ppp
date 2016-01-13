@@ -189,10 +189,10 @@ PrioritisationII <- function(directory = getwd(), weighting,
       
       # round outputs for csv files
       removed.spp.df <- merge(removed.spp.df,
-          b.data[,c(1:3)],by="species_id",sort=FALSE)
+          b.data[,c("species_id", "TaxaText", "TaxaCode")],by="species_id",sort=FALSE)
       
-      removed.spp.df[,c(3:4,7)]<-round(removed.spp.df[,c(3:4,7)],digits = 2)
-      removed.spp.df[,5]<-round(removed.spp.df[,5], digits = 0)                 
+      removed.spp.df[,c("B", "W", "init.W")]<-round(removed.spp.df[,c("B", "W", "init.W")],digits = 8)
+      removed.spp.df[,"Co"]<-round(removed.spp.df[,"Co"], digits = 8)
       ans$removed.spp.df<-removed.spp.df
       
       #no species are remaining so nothing to write here...
@@ -272,6 +272,9 @@ PrioritisationII <- function(directory = getwd(), weighting,
         function(x) with(a.data, which(species_id == x)))
     
     # Find action ids associated with each remaining species
+    # it's better to use action ID, rather than row number.  
+    # For instance, for species ID = 4, what are the action IDs associated with
+    # this species?
     actions_spp_index1 <- lapply(unique_spp_no, 
         function(x) subset(a.data, 
             subset = species_id == x, 
@@ -279,6 +282,8 @@ PrioritisationII <- function(directory = getwd(), weighting,
             drop = TRUE)
             )
     
+    # Benefits and weights datasets don't really need these, as they index
+    # on species ID anyway.  Could use 'unique_spp_no' to reference instead.
     benefits_spp_index <- match(unique_spp_no, with(b.data, species_id))
     weights_spp_index <- match(unique_spp_no, with(w.data, species_id))
     
@@ -467,18 +472,17 @@ PrioritisationII <- function(directory = getwd(), weighting,
   ans$initially_removed <- subset(removed.spp.df, iteration == 1)
   
   # round outputs for csv files
-  removed.spp.df<-merge(removed.spp.df,b.data[,c(1:3)], 
-      by = "species_id",sort = FALSE)
+  removed.spp.df<-merge(removed.spp.df,b.data[,c("species_id", "TaxaText", "TaxaCode")], by = "species_id",sort = FALSE)
       
-  removed.spp.df[,c(3:4,7)]<-round(removed.spp.df[,c(3:4,7)],digits = 2)
-  removed.spp.df[,5]<-round(removed.spp.df[,5], digits = 0)                 
-  ans$removed.spp.df<-removed.spp.df
+  removed.spp.df[,c("B", "W", "init.W")]<-round(removed.spp.df[,c("B", "W", "init.W")],digits = 8)
+  removed.spp.df[,"Co"] <- round(removed.spp.df[,"Co"], digits = 8)
+  ans$removed.spp.df <- removed.spp.df
   
-  remaining.spp.df<-merge(remaining.spp.df,
-      b.data[,c(1:3)], by = "species_id",sort = FALSE)
+  remaining.spp.df <- merge(remaining.spp.df,
+      b.data[,c("species_id", "TaxaText", "TaxaCode")], by = "species_id",sort = FALSE)
   
-  remaining.spp.df[,c(3:4,7)] <- round(remaining.spp.df[,c(3:4,7)],digits = 2)
-  remaining.spp.df[,5]<-round(remaining.spp.df[,5],digits = 0)
+  remaining.spp.df[,c("B", "W", "init.W")] <- round(remaining.spp.df[,c("B", "W", "init.W")],digits = 8)
+  remaining.spp.df[,"Co"]<-round(remaining.spp.df[,"Co"],digits = 8)
   
   ans$ranked_list <- remaining.spp.df
   
