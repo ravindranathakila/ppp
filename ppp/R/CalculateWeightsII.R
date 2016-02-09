@@ -2,7 +2,8 @@ CalculateWeightsII <-
 function(weights.data, affected, weighting = 1, multiplier = 1, ...){
 
     if(length(affected) == 0){
-        cat("The removed species does not affect W (or no species removed), no need to recalculate weights\n")
+	cat("Either the removed species does not affect W or no species  were removed, so no need to recalculate weights.\n")
+
         return(weights.data)}
     
     # For each affected species
