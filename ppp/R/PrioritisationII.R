@@ -58,24 +58,21 @@ PrioritisationII <- function(directory = getwd(), weighting,
   removed <- c()
   
   # Create the 'remaining' list of species
+  # (take the species_ids from a.data)
   spp <- with(a.data, unique(species_id))
+  
   remaining.spp.df <- data.frame('species_id' = spp,'CE' = 1, 'B' = 0, 
       'W' = 0, 'Co' = 1, 'S' = 0)
   
-  w_match <- match(with(remaining.spp.df, species_id), 
-      with(w.data, species_id))
+  # Add some extra information for each species from w.data, ie sciname, genus
+  merge_cols <- c("weight_value", "species_id", "sciname", "genus",
+  "family", "order", "Bs", "Bg", "Bf", "Endem.spp", "Endem.gen", "Endem.fam")
   
-  remaining.spp.df <- cbind(remaining.spp.df, 
-          "init.W" = w.data[w_match, "weight_value"])
+  remaining.spp.df <- merge(remaining.spp.df, w.data[,merge_cols], 
+      by = "species_id")
   
-  remaining.spp.df$W <- w.data[w_match, "weight_value"]
-  
-  # Add some extra information for each species, ie sciname, genus, etc
-  extra <- match(with(a.data, unique(species_id)), with(b.data, species_id))
-  
-  remaining.spp.df <- cbind(remaining.spp.df, 
-      w.data[extra,c("sciname", "genus", "family", "order", "Bs", "Bg", "Bf",
-      "Endem.spp", "Endem.gen", "Endem.fam")])
+  # Save the initial weights as another column.  
+  remaining.spp.df[,c("init.W")] <- remaining.spp.df[,c("weight_value")]
   
   # Create the 'removed' list of species (currently empty)
     removed.spp.df <- data.frame(remaining.spp.df[rep(FALSE,
@@ -147,8 +144,8 @@ PrioritisationII <- function(directory = getwd(), weighting,
           subset = !(species_id %in% removers))
       
       no_actions_removed <- sum(with(a.data, species_id==removed))
-      cat('\t| actions removed (from last it.) :\t', no_actions_removed, '\n')
-      cat('\t| species removed so far :\t\t\t', NROW(removed.spp.df), '\n')
+      cat('\t| ', no_actions_removed, ' actions removed (from last it.)\n')
+      cat('\t| ', NROW(removed.spp.df), ' species removed so far\n')
       
       # Remove actions and benefits associated with the removed species
       out_actions <- subset(a.data, subset = species_id %in% removers, 
@@ -189,9 +186,10 @@ PrioritisationII <- function(directory = getwd(), weighting,
       
       # round outputs for csv files
       removed.spp.df <- merge(removed.spp.df,
-          b.data[,c("species_id", "TaxaText", "TaxaCode")],by="species_id",sort=FALSE)
+          b.data[,c("species_id", "TaxaText", "TaxaCode")],
+          by = "species_id", sort = FALSE)
       
-      removed.spp.df[,c("B", "W", "init.W")]<-round(removed.spp.df[,c("B", "W", "init.W")],digits = 8)
+      removed.spp.df[,c("B", "W", "init.W")] <- round(removed.spp.df[,c("B", "W", "init.W")],digits = 8)
       removed.spp.df[,"Co"]<-round(removed.spp.df[,"Co"], digits = 8)
       ans$removed.spp.df<-removed.spp.df
       
@@ -472,14 +470,15 @@ PrioritisationII <- function(directory = getwd(), weighting,
   ans$initially_removed <- subset(removed.spp.df, iteration == 1)
   
   # round outputs for csv files
-  removed.spp.df<-merge(removed.spp.df,b.data[,c("species_id", "TaxaText", "TaxaCode")], by = "species_id",sort = FALSE)
-      
+  removed.spp.df <- merge(removed.spp.df,b.data[,c("species_id", "TaxaText", "TaxaCode")], by = "species_id", sort = FALSE)
+  
   removed.spp.df[,c("B", "W", "init.W")]<-round(removed.spp.df[,c("B", "W", "init.W")],digits = 8)
   removed.spp.df[,"Co"] <- round(removed.spp.df[,"Co"], digits = 8)
   ans$removed.spp.df <- removed.spp.df
   
   remaining.spp.df <- merge(remaining.spp.df,
-      b.data[,c("species_id", "TaxaText", "TaxaCode")], by = "species_id",sort = FALSE)
+      b.data[,c("species_id", "TaxaText", "TaxaCode")], 
+      by = "species_id", sort = FALSE)
   
   remaining.spp.df[,c("B", "W", "init.W")] <- round(remaining.spp.df[,c("B", "W", "init.W")],digits = 8)
   remaining.spp.df[,"Co"]<-round(remaining.spp.df[,"Co"],digits = 8)
