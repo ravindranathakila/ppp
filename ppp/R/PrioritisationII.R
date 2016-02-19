@@ -100,8 +100,10 @@ PrioritisationII <- function(directory = getwd(), weighting,
     if(loop_iteration > 1){
         # Take the last species out
         removed <- with(remaining.spp.df, species_id[n.remaining])
-        cat(paste('Removed species: ', removed, ',', 
-            with(remaining.spp.df, sciname[ n.remaining ]), '\n'))
+        cat('Removed species with ID: ', removed, '\n')
+        
+        sciname <- with(remaining.spp.df, sciname[ n.remaining ])
+        cat('Removed species with scientific name: ', sciname, '\n')
         
         removers <- union(removers, removed)
         # -identify overlapIDs and hence actionIDs which are affected by the
@@ -163,7 +165,7 @@ PrioritisationII <- function(directory = getwd(), weighting,
     
     # should be the same as length(with(a.data, unique(species_id)))
     n.remaining <- NROW(remaining.spp.df) 
-    cat('\t| species left :\t\t', n.remaining, '\n')
+    cat('\t| ', n.remaining, ' species left\n')
     cat('\t|-----------------------------------\n\n')
     
     # Check if there are any species left, if not then exit the prioritisation
